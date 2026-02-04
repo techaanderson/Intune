@@ -1,0 +1,4 @@
+Powershell.exe -ExecutionPolicy ByPass -File SAP_Install.ps1
+Powershell.exe -ExecutionPolicy ByPass -File SAP_Uninstall.ps1
+
+Start-Process powershell.exe -Verb runAs -ArgumentList "-File SAP_Install.ps1" -Wait

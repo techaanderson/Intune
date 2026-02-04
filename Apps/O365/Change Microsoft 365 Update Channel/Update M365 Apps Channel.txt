@@ -1,0 +1,9 @@
+Channel="CurrentPreview"
+Channel="Current"
+Channel="MonthlyEnterprise"
+Channel="SemiAnnualPreview"
+Channel="SemiAnnual
+
+cd "C:\Program Files\Common Files\Microsoft Shared\ClickToRun"
+.\OfficeC2RClient.exe /changesetting Channel=CurrentPreview
+.\OfficeC2RClient.exe /update user

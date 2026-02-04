@@ -1,0 +1,1 @@
+Copy-Item -Path C:\Windows\Sun\Java\Deployment\exception.sites -Destination \\NOCSCMP01\PackageSource$\Software\Desktop\Java\ExceptionList\exception.sites
