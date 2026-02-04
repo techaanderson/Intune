@@ -1,0 +1,40 @@
+
+Desktop Info by Glenn Delahoy
+=============================
+https://www.glenn.delahoy.com
+
+This is the TL;DR document to get you started.
+
+Desktop Info will work out of the box with no configuration. It starts by creating a very basic 
+default configuration file which you can modify to suit your needs. It's a text file so just open it in Notepad 
+or your favourite text editor. All the information you need to customise the configuration is in the manual. 
+However, Desktop Info kindly provides a number of sample configuration files in the sample-config folder. Just 
+copy one of these to the main folder with the .exe files and rename it to desktopinfo.ini. Desktop Info will now 
+run with the new configuration. 
+
+If Desktop Info has multiple pages of information, you'll see some navigation buttons at the bottom.
+
+You can drag an .ini configuration file on to the .exe file to execute Desktop Info with that configuration file. 
+You can create a Windows shortcut with an .ini file parameter.
+
+The manual is very big and comprehensive, I don't blame you if you don't want to wade through it. I suggest you 
+see how far you get without it and when you get stuck, ctrl-f and search for what you want, browse the contents,
+see if I've done it in the "sample-config\desktopinfo-advanced.ini" file and if all else fails search the forums.
+
+
+Q & A
+=====
+Q. Where's the Release Notes or list of changes?
+A. It's at the end of the manual PDF. It's in a post on the forums. It's in a post on Ko-fi.
+
+Q. How do I get rid of the title?
+A. Open the ini file in a text editor, look for the first COMMENT line and delete it or modify it to suit your 
+needs.
+
+Q. What other information can it show?
+A. Copy the sample-config\desktopinfo-advanced.ini file to the main folder and rename it to desktopinfo.ini. When 
+you run Desktop Info you'll now see dozens of pages of information. Now browse the manual PDF. Everything is
+documented there.
+
+Q. Can I request new features?
+A. You can try. Leave a request on the forums. Maybe someone knows how to do it already.
