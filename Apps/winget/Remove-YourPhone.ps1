@@ -1,1 +1,0 @@
-get-appxpackage *Microsoft.YourPhone* | remove-appxpackage 
