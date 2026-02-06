@@ -1,5 +1,5 @@
-<Configuration ID="c15739f3-4e0c-4ecb-a777-c9bbdca19131">
-  <Info Description="Install Access, PowerPoint, Teams, Excel, OneNote, Outlook, Word, and Visio User based activation" />
+<Configuration ID="d522db60-d3c7-4ad3-8751-60b3fed1f399">
+  <Info Description="Install Access, PowerPoint, Excel, OneNote, Outlook, Word, and Visio with User based activation" />
   <Add OfficeClientEdition="64" Channel="Current">
     <Product ID="O365ProPlusRetail">
       <Language ID="en-us" />
@@ -13,11 +13,7 @@
     <Product ID="VisioProRetail">
       <Language ID="en-us" />
       <ExcludeApp ID="Groove" />
-      <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
-      <ExcludeApp ID="Outlook" />
-      <ExcludeApp ID="Publisher" />
-      <ExcludeApp ID="Teams" />
     </Product>
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />

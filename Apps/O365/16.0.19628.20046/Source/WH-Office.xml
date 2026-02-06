@@ -1,5 +1,5 @@
-<Configuration ID="c15739f3-4e0c-4ecb-a777-c9bbdca19131">
-  <Info Description="Install Access, PowerPoint, Teams, Excel, OneNote, Outlook, Word, and Visio User based activation" />
+<Configuration ID="c2703177-dccb-4fac-8d5b-127cd8db8aad">
+  <Info Description="Install Access, PowerPoint, Excel, OneNote, Outlook, and Word with User based activation" />
   <Add OfficeClientEdition="64" Channel="Current">
     <Product ID="O365ProPlusRetail">
       <Language ID="en-us" />
