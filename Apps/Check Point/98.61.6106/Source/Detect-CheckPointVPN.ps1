@@ -1,5 +1,5 @@
 $DisplayName = "Check Point VPN"
-$Version = "98.61.6025"
+$Version = "98.61.6106"
 
 $Installed = Get-ChildItem -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall, HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall |
 Get-ItemProperty |
