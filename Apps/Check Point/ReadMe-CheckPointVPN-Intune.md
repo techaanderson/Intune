@@ -11,8 +11,9 @@ VPN Configuration Utility for Endpoint Security Clients for Windows:
 https://support.checkpoint.com/results/sk/sk122574
 
 # Setup VPN Config
-First you must unobscure the trac.config file by going to trac.defaults and change LINE 1.
+-First you must unobscure the trac.config file by going to trac.defaults and change LINE 1.
 UNOBSCURE_FILE INT 1 to 0. Then restart your Checkpoint Endpoint Connect service.
+-
 
 
 
@@ -30,7 +31,7 @@ Logo: CitrixWorkspaceApp_Icon.png
 
 # Intune Program
 Install command: 
-CitrixWorkspaceFullInstaller.exe /silent /AutoUpdateStream=LTSR /AutoUpdateCheck=manual /includeSSON /cleaninstall /forceinstall
+powershell.exe -ExecutionPolicy Bypass -File .\Install-CheckPointVPN.ps1
 
 Uninstall command:
 CitrixWorkspaceFullInstaller.exe /silent /uninstall

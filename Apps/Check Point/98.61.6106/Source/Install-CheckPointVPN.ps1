@@ -25,29 +25,50 @@ if (-not (Test-Path $InstallerPath)) {
     exit 1
 }
 
-# Define your specific arguments for the installation
+# Define configuration script path
+$ConfigScript = Join-Path $PSScriptRoot "Config-CheckPointVPN_Site.ps1"
+if (-not (Test-Path $ConfigScript)) {
+    Write-Warning "Configuration script not found at: $ConfigScript. Installation will proceed without configuration."
+    $SkipConfig = $true
+}
+
+# Define arguments for installation
 $msiArguments = @(
-    "/i"                    # Install the package
-    "`"$InstallerPath`""    # Path to the MSI file (double-quoted to handle spaces)
-    "/qn"                   # User Interface level: Quiet, No UI
-    "/norestart"            # Suppress any restart prompts
+    "/i", "`"$InstallerPath`""  # Install the package
+    "/qn"                       # User Interface level: Quiet, No UI
+    "/norestart"                # Suppress any restart prompts
 )
 
-## Start
+## Start Installation
 Write-Host "Starting Check Point VPN installation..." -ForegroundColor Cyan
-Start-Process -FilePath "msiexec.exe" -ArgumentList $msiArguments -Wait -NoNewWindow
+$installProcess = Start-Process -FilePath "msiexec.exe" -ArgumentList $msiArguments -Wait -PassThru -NoNewWindow
+$installExitCode = $installProcess.ExitCode
+
+if ($installExitCode -eq 0) {
+    Write-Host "Check Point VPN installation completed successfully (Exit Code: $installExitCode)" -ForegroundColor Green
+}
+elseif ($installExitCode -eq 3010) {
+    Write-Host "Installation completed successfully. Restart required (Exit Code: $installExitCode)" -ForegroundColor Yellow
+}
+else {
+    Write-Error "Check Point VPN installation failed with exit code: $installExitCode"
+    exit $installExitCode
+}
 
 ## Configure
-Write-Host "Configuring Check Point VPN installation" -ForegroundColor Cyan
-#Start-Process -FilePath "powershell.exe" -ArgumentList "-File", ".\Config-CheckPointVPN_Site.ps1" -Wait -NoNewWindow
-# Configure trac.exe for Check Point VPN Site
-$site = "usercheck.womans.org"
-$DisplayName = "usercheck.womans.org"
-$LoginOption = "Woman's Login"
-## Set the location to trac.exe directory
-# Execute trac.exe with the specified arguments
-$tracPath = "C:\Program Files (x86)\CheckPoint\Endpoint Connect\trac.exe"
-& $tracPath create -s $site -di $DisplayName -lo $LoginOption
+if (-not $SkipConfig) {
+    Write-Host "Configuring Check Point VPN installation..." -ForegroundColor Cyan
+    $configProcess = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "`"$ConfigScript`"" -Wait -PassThru -NoNewWindow
+    $configExitCode = $configProcess.ExitCode
+    
+    if ($configExitCode -eq 0) {
+        Write-Host "Configuration completed successfully (Exit Code: $configExitCode)" -ForegroundColor Green
+    }
+    else {
+        Write-Error "Configuration script failed with exit code: $configExitCode"
+        exit $configExitCode
+    }
+}
 
 ## Complete
-Write-Host "Finished Check Point VPN installation" -ForegroundColor Cyan
+Write-Host "Finished Check Point VPN installation and configuration" -ForegroundColor Cyan

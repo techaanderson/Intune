@@ -16,11 +16,35 @@
 #>
 
 # Configure trac.exe for Check Point VPN Site
-$site = "usercheck.womans.org"
-$DisplayName = "usercheck.womans.org"
-$LoginOption = "Woman's Login"
 
-## Set the location to trac.exe directory
-# Execute trac.exe with the specified arguments
+# VPN Site Configuration
+$VPNConfig = @{
+    Site        = "usercheck.womans.org"
+    DisplayName = "usercheck.womans.org"
+    LoginOption = "Woman's Login"
+}
+
+# Path to trac.exe
 $tracPath = "C:\Program Files (x86)\CheckPoint\Endpoint Connect\trac.exe"
-& $tracPath create -s $site -di $DisplayName -lo $LoginOption
+
+# Validate trac.exe exists
+if (-not (Test-Path -Path $tracPath)) {
+    Write-Error "CheckPoint trac.exe not found at $tracPath"
+    exit 1
+}
+
+# Create the VPN site configuration
+try {
+    Write-Verbose "Creating VPN site: $($VPNConfig.Site)"
+    & $tracPath create -s $VPNConfig.Site -di $VPNConfig.DisplayName -lo $VPNConfig.LoginOption
+    
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "Successfully configured VPN site: $($VPNConfig.Site)"
+    } else {
+        Write-Error "Failed to create VPN site. Exit code: $LASTEXITCODE"
+        exit $LASTEXITCODE
+    }
+} catch {
+    Write-Error "Error executing trac.exe: $_"
+    exit 1
+}
