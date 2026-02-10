@@ -20,21 +20,22 @@ UNOBSCURE_FILE INT 1 to 0. Then restart your Checkpoint Endpoint Connect service
 
 # Intune Windows App Info
 Type: Win32
-File: CitrixWorkspaceFullInstaller.intunewin
-Name: Citrix Workspace
-Description: The Citrix Workspace app allows for secure, unified access to all your SaaS apps, web apps, virtual apps, files, and desktops. If your company uses Citrix simply login with your company credentials to access all of the resources you need to be productive from anywhere.
-Publisher: Citrix
-App Version: 2507.1 CU1 LTSR
-Category: Productivity
+File: E89.10_CheckPointVPN.intunewin
+Name: Check Point VPN
+Description: Check Point VPN provides secure, encrypted remote access to corporate networks for mobile and remote users
+Publisher: Check Point
+App Version: 98.61.6106
+Category: Security
 Show as featured app: Yes
-Logo: CitrixWorkspaceApp_Icon.png
+Notes: Available: Checkpoint-VPN_users
+Logo: CheckPointVPN_Icon.png
 
 # Intune Program
-Install command: 
-powershell.exe -ExecutionPolicy Bypass -File .\Install-CheckPointVPN.ps1
+Installer type: PowerShell Script
+Install-CheckPointVPN.ps1
 
-Uninstall command:
-CitrixWorkspaceFullInstaller.exe /silent /uninstall
+Uninstall type: PowerShell Script
+Uninstall-CheckPointVPN.ps1
 
 Installation time required: 10
 
@@ -48,11 +49,7 @@ Device restart behavior: Determine behavior based on return codes
 No requirements
 
 # Intune Detection rules
-File System Detection Rule (Most Common & Recommended)
-Type: File System.
-Path: %ProgramFiles(x86)%\Citrix\ICA Client\Receiver\
-File/Folder Name: receiver.exe
-Property: Version
-Operator: Greater than or equal to
-Value: The specific version number you're deploying (e.g., 23.11.0.21)
-Why it works: This targets the main executable and checks its version, which is reliable even as folder names change with updates, as long as you update the version value in Intune.
+Use a custom detection script
+Detect-CheckPointVPN.ps1
+Run script as 32-bit process on 64-bit clients: No
+Enforce script signature check and run script silently: No
