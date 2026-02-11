@@ -47,4 +47,11 @@ Detection Method: Version Comparison
 Greater than or equal to
 16.0.19628.20046
 
+Registry
+Key Path: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\VisioProRetail - en-us
+Value Name: DisplayVersion
+Detection Method: Version Comparison
+Greater than or equal to
+16.0.19628.20046
+
 #--------------------------------------------------------------------------------
