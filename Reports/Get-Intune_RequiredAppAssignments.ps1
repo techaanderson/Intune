@@ -1,0 +1,48 @@
+#Install-Module -Name Microsoft.Graph.DeviceManagement -Force -AllowClobber
+#Install-Module -Name Microsoft.Graph.Groups -Force -AllowClobber
+#Import-Module -Name Microsoft.Graph.Groups
+#Import-Module -Name Microsoft.Graph.DeviceManagement
+
+#Connect-MgGraph -scopes Group.Read.All, DeviceManagementManagedDevices.Read.All, DeviceManagementServiceConfig.Read.All, DeviceManagementApps.Read.All, DeviceManagementApps.Read.All, DeviceManagementConfiguration.Read.All, DeviceManagementConfiguration.ReadWrite.All, DeviceManagementApps.ReadWrite.All
+
+
+# Applications 
+
+$Resource = "deviceAppManagement/mobileApps"
+$graphApiVersion = "Beta"
+$uri = "https://graph.microsoft.com/$graphApiVersion/$($Resource)?`$filter=(isAssigned eq true)&`$expand=Assignments"
+
+
+$Apps = (Invoke-MgGraphRequest -Method GET -Uri $uri).Value | Where-Object {$_.assignments.intent -like "required"}
+
+Write-host "Start Script output -----------------" -ForegroundColor Cyan 
+foreach ($App in $Apps) { 
+
+
+Write-host "$($App.DisplayName)" -ForegroundColor Yellow
+
+ if ($App.assignments.id -like "acacacac-9df4-4c7d-9d50-4ef0226f57a9*" -or $App.assignments.id -like "adadadad-808e-44e2-905a-0b7873a8a531*") {
+ 
+    if ($App.assignments.id -like "acacacac-9df4-4c7d-9d50-4ef0226f57a9*")
+    {Write-host "Assigned as $($App.assignments.intent) ---- EntraID Group: All Users (Built-in Group)"}
+    if ($App.assignments.id -like "adadadad-808e-44e2-905a-0b7873a8a531*")
+    {Write-host "Assigned as $($App.assignments.intent) ---- EntraID Group: All Devices (Built-in Group)"}
+ 
+}
+Else {
+
+$EIDGroupId = $App.assignments.target.groupId
+
+
+foreach ($group in $EIDGroupId) { 
+
+$EIdGroup = Get-MgGroup -Filter "Id eq '$group'" -ErrorAction Continue
+$AssignIntent = $App.assignments | Where-Object -Property id -like "$group*"
+
+Write-host "Assigned as $($AssignIntent.intent) ---- EntraID Group: $($EIdGroup.displayName)"
+
+}
+}
+}
+Write-host "End Script output -----------------" -ForegroundColor Cyan
+Write-host "Total apps: $($apps.count)" -ForegroundColor Cyan
