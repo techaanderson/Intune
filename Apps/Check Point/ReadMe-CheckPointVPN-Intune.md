@@ -10,13 +10,6 @@ https://support.checkpoint.com/results/sk/sk182722
 VPN Configuration Utility for Endpoint Security Clients for Windows:
 https://support.checkpoint.com/results/sk/sk122574
 
-# Setup VPN Config
--First you must unobscure the trac.config file by going to trac.defaults and change LINE 1.
-UNOBSCURE_FILE INT 1 to 0. Then restart your Checkpoint Endpoint Connect service.
--
-
-
-
 
 # Intune Windows App Info
 Type: Win32
