@@ -1,0 +1,8 @@
+# Install
+%SystemRoot%\System32\WindowsPowershell\v1.0\powershell.exe -ExecutionPolicy Bypass -WindowStyle hidden -File .\Teams-Install.ps1
+
+# Uninstall
+%SystemRoot%\System32\WindowsPowershell\v1.0\powershell.exe -ExecutionPolicy Bypass -WindowStyle hidden -File .\Teams-Uninstall.ps1
+
+# Detection Rule
+.\Teams-Detection.ps1
