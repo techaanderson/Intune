@@ -7,6 +7,7 @@
 Name: Microsoft 365 Apps
 Description: Install Access, PowerPoint, Excel, OneNote, Outlook, and Word with User based activation
 Publisher: Microsoft
+App Version: 16.0.20026.20112
 Category: Productivity
 Show as featured app: yes
 Notes: Available: All Office Licensed Users
